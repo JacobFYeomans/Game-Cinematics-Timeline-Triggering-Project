@@ -10,7 +10,11 @@ using UnityEditor;
 
 public class Controller : MonoBehaviour
 {
-    
+    public GameObject pausemenuobject;
+    public GameObject resumeGameObject;
+    public GameObject restartGameObject;
+    public GameObject quitGameObject;
+
     public static Controller Instance { get; protected set; }
 
     public Camera MainCamera;
@@ -54,6 +58,10 @@ public class Controller : MonoBehaviour
 
         m_IsPaused = false;
         m_Grounded = true;
+        resumeGameObject.SetActive(false);
+        restartGameObject.SetActive(false);
+        quitGameObject.SetActive(false);
+        pausemenuobject.SetActive(false);
 
         MainCamera.transform.SetParent(CameraPosition, false);
         MainCamera.transform.localPosition = Vector3.zero;
@@ -71,6 +79,16 @@ public class Controller : MonoBehaviour
         bool wasGrounded = m_Grounded;
         bool loosedGrounding = false;
 
+        if (Input.GetKey("p"))
+        {
+            Time.timeScale = 0;
+            pausemenuobject.SetActive(true);
+            resumeGameObject.SetActive(true);
+            restartGameObject.SetActive(true);
+            quitGameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
         //we define our own grounded and not use the Character controller one as the character controller can flicker
         //between grounded/not grounded on small step and the like. So we actually make the controller "not grounded" only
         //if the character controller reported not being grounded for at least .5 second;
