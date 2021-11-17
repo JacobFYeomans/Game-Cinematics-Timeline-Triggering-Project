@@ -88,6 +88,7 @@ public class Controller : MonoBehaviour
             quitGameObject.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            //MouseSensitivity = 0.0f;
         }
         //we define our own grounded and not use the Character controller one as the character controller can flicker
         //between grounded/not grounded on small step and the like. So we actually make the controller "not grounded" only
